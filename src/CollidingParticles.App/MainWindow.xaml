@@ -53,7 +53,7 @@
 
                 <StackPanel Orientation="Vertical">
                     <TextBlock Text="Colliding Particles Lab" FontSize="22" FontWeight="Bold" Foreground="{StaticResource TextPrimary}" />
-                    <TextBlock Text="Elastic collisions with adjustable energy and density." FontSize="12" Foreground="{StaticResource TextMuted}" />
+                    <TextBlock Text="Elastic collisions in a 3D volume." FontSize="12" Foreground="{StaticResource TextMuted}" />
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -76,8 +76,13 @@
         </Border>
 
         <Grid Grid.Row="1" Margin="24,0,24,24">
-            <Border Background="#141924" CornerRadius="22" BorderBrush="#233046" BorderThickness="1">
-                <Canvas x:Name="SimulationCanvas" ClipToBounds="True" />
+            <Border x:Name="ViewportHost" Background="#141924" CornerRadius="22" BorderBrush="#233046" BorderThickness="1" Focusable="True" MouseDown="Viewport_MouseDown" MouseUp="Viewport_MouseUp" MouseMove="Viewport_MouseMove" PreviewMouseWheel="Viewport_MouseWheel">
+                <Viewport3D x:Name="SimulationViewport" ClipToBounds="True">
+                    <Viewport3D.Camera>
+                        <PerspectiveCamera x:Name="MainCamera" Position="0,0,900" LookDirection="0,0,-900" UpDirection="0,1,0" FieldOfView="55" />
+                    </Viewport3D.Camera>
+                    <ModelVisual3D x:Name="SceneVisual" />
+                </Viewport3D>
             </Border>
             <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="18" Background="#2A3448" Padding="12" CornerRadius="12" Opacity="0.88">
                 <TextBlock x:Name="StatsText" Foreground="{StaticResource TextPrimary}" FontSize="12" />
@@ -85,3 +90,4 @@
         </Grid>
     </Grid>
 </Window>
+

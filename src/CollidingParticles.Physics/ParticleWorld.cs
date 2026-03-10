@@ -6,21 +6,24 @@ public sealed class ParticleWorld
 {
     private readonly List<Particle> _particles = new();
 
-    public ParticleWorld(float width, float height)
+    public ParticleWorld(float width, float height, float depth)
     {
         Width = width;
         Height = height;
+        Depth = depth;
     }
 
     public float Width { get; private set; }
     public float Height { get; private set; }
+    public float Depth { get; private set; }
     public IReadOnlyList<Particle> Particles => _particles;
     public SimulationSettings Settings { get; } = new();
 
-    public void Resize(float width, float height)
+    public void Resize(float width, float height, float depth)
     {
         Width = width;
         Height = height;
+        Depth = depth;
     }
 
     public void Clear() => _particles.Clear();
@@ -56,8 +59,10 @@ public sealed class ParticleWorld
         float right = Width - particle.Radius - Settings.BoundsPadding;
         float top = particle.Radius + Settings.BoundsPadding;
         float bottom = Height - particle.Radius - Settings.BoundsPadding;
-        Vector2 position = particle.Position;
-        Vector2 velocity = particle.Velocity;
+        float front = particle.Radius + Settings.BoundsPadding;
+        float back = Depth - particle.Radius - Settings.BoundsPadding;
+        Vector3 position = particle.Position;
+        Vector3 velocity = particle.Velocity;
 
         if (position.X < left)
         {
@@ -81,20 +86,31 @@ public sealed class ParticleWorld
             velocity.Y = -velocity.Y * Settings.Restitution;
         }
 
+        if (position.Z < front)
+        {
+            position.Z = front;
+            velocity.Z = -velocity.Z * Settings.Restitution;
+        }
+        else if (position.Z > back)
+        {
+            position.Z = back;
+            velocity.Z = -velocity.Z * Settings.Restitution;
+        }
+
         particle.Position = position;
         particle.Velocity = velocity;
     }
 
     private void ResolveCollision(Particle a, Particle b)
     {
-        Vector2 delta = b.Position - a.Position;
+        Vector3 delta = b.Position - a.Position;
         float distance = delta.Length();
         float minDistance = a.Radius + b.Radius;
 
         if (distance <= 0f)
         {
             distance = 0.0001f;
-            delta = new Vector2(minDistance, 0f);
+            delta = new Vector3(minDistance, 0f, 0f);
         }
 
         if (distance >= minDistance)
@@ -102,9 +118,9 @@ public sealed class ParticleWorld
             return;
         }
 
-        Vector2 normal = delta / distance;
-        Vector2 relativeVelocity = b.Velocity - a.Velocity;
-        float velocityAlongNormal = Vector2.Dot(relativeVelocity, normal);
+        Vector3 normal = delta / distance;
+        Vector3 relativeVelocity = b.Velocity - a.Velocity;
+        float velocityAlongNormal = Vector3.Dot(relativeVelocity, normal);
 
         if (velocityAlongNormal > 0f)
         {
@@ -118,14 +134,14 @@ public sealed class ParticleWorld
         float impulseMagnitude = -(1f + Settings.Restitution) * velocityAlongNormal;
         impulseMagnitude /= inverseMassA + inverseMassB;
 
-        Vector2 impulse = impulseMagnitude * normal;
+        Vector3 impulse = impulseMagnitude * normal;
         a.Velocity -= impulse * inverseMassA;
         b.Velocity += impulse * inverseMassB;
 
         ApplyPositionalCorrection(a, b, normal, minDistance - distance);
     }
 
-    private static void ApplyPositionalCorrection(Particle a, Particle b, Vector2 normal, float penetration)
+    private static void ApplyPositionalCorrection(Particle a, Particle b, Vector3 normal, float penetration)
     {
         const float percent = 0.8f;
         const float slop = 0.01f;
@@ -138,7 +154,7 @@ public sealed class ParticleWorld
         float inverseMassA = 1f / a.Mass;
         float inverseMassB = 1f / b.Mass;
         float totalInverseMass = inverseMassA + inverseMassB;
-        Vector2 correction = (corrected / totalInverseMass) * normal;
+        Vector3 correction = (corrected / totalInverseMass) * normal;
 
         a.Position -= correction * inverseMassA;
         b.Position += correction * inverseMassB;

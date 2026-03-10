@@ -4,7 +4,7 @@ namespace CollidingParticles.Physics;
 
 public sealed class Particle
 {
-    public Particle(Vector2 position, Vector2 velocity, float radius, float mass)
+    public Particle(Vector3 position, Vector3 velocity, float radius, float mass)
     {
         Position = position;
         Velocity = velocity;
@@ -12,8 +12,8 @@ public sealed class Particle
         Mass = mass;
     }
 
-    public Vector2 Position { get; set; }
-    public Vector2 Velocity { get; set; }
+    public Vector3 Position { get; set; }
+    public Vector3 Velocity { get; set; }
     public float Radius { get; }
     public float Mass { get; }
 }
