@@ -1,0 +1,33 @@
+# Build outputs
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Rider/VS Code
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+*.snupkg
+.nuget/packages/
+
+# Test results
+TestResults/
+
+# Logs
+*.log
+
+# WPF build artifacts
+*.g.cs
+*.g.i.cs

@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollidingParticles.Physics", "CollidingParticles.Physics\CollidingParticles.Physics.csproj", "{451E0F49-5E11-49A1-9B39-87A295B21D90}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollidingParticles.App", "CollidingParticles.App\CollidingParticles.App.csproj", "{8D36F81F-E5B0-49D8-8122-A9A685271AC4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{451E0F49-5E11-49A1-9B39-87A295B21D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{451E0F49-5E11-49A1-9B39-87A295B21D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{451E0F49-5E11-49A1-9B39-87A295B21D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{451E0F49-5E11-49A1-9B39-87A295B21D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D36F81F-E5B0-49D8-8122-A9A685271AC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D36F81F-E5B0-49D8-8122-A9A685271AC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D36F81F-E5B0-49D8-8122-A9A685271AC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D36F81F-E5B0-49D8-8122-A9A685271AC4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
