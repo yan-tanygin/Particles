@@ -2,28 +2,6 @@ using System.Numerics;
 
 namespace CollidingParticles.Physics;
 
-public sealed class SimulationSettings
-{
-    public float Restitution { get; set; } = 0.95f;
-    public float BoundsPadding { get; set; } = 2f;
-}
-
-public sealed class Particle
-{
-    public Particle(Vector2 position, Vector2 velocity, float radius, float mass)
-    {
-        Position = position;
-        Velocity = velocity;
-        Radius = radius;
-        Mass = mass;
-    }
-
-    public Vector2 Position { get; set; }
-    public Vector2 Velocity { get; set; }
-    public float Radius { get; }
-    public float Mass { get; }
-}
-
 public sealed class ParticleWorld
 {
     private readonly List<Particle> _particles = new();

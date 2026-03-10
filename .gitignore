@@ -31,3 +31,7 @@ TestResults/
 # WPF build artifacts
 *.g.cs
 *.g.i.cs
+
+# Local .NET SDK home
+.dotnet/
+
