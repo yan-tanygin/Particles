@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -291,6 +292,13 @@ public partial class MainWindow : Window
         byte b = (byte)Math.Round((b1 + m) * 255);
 
         return Color.FromRgb(r, g, b);
+    }
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape)
+        {
+            Close();
+        }
     }
 }
 

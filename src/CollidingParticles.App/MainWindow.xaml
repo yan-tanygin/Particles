@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Colliding Particles" Height="720" Width="1200"
-        Background="#101219" FontFamily="Cambria">
+        Background="#101219" FontFamily="Cambria"
+        KeyDown="Window_KeyDown">
     <Window.Resources>
         <LinearGradientBrush x:Key="AppBackground" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0E1017" Offset="0" />
